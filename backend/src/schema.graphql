@@ -4,4 +4,5 @@ type Query {
 
 type Mutation {
 	me: String
+	createStore(name: String, description: String): String
 }

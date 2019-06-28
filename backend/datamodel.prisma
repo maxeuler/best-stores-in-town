@@ -2,3 +2,9 @@ type User {
   id: ID! @id
   name: String!
 }
+
+type Store {
+  id: ID! @id
+  name: String!
+  description: String!
+}
