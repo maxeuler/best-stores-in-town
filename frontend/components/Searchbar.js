@@ -7,6 +7,7 @@ const Search = styled.input`
   background: none;
   border: none;
   font-size: 3rem;
+  color: #fff;
   padding: 1.5rem;
   caret-color: #aaa;
   outline: none;

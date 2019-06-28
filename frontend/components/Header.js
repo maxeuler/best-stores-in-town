@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 import Nav, { NavLink } from './Nav';
 import Searchbar from './Searchbar';
@@ -21,6 +22,7 @@ const Logo = styled.div`
   height: 100%;
   padding: 1rem 0;
   margin: 0 2rem;
+  cursor: pointer;
   img {
     height: 100%;
   }
@@ -28,9 +30,11 @@ const Logo = styled.div`
 
 const Header = () => (
   <SytledHeader>
-    <Logo>
-      <img src="./static/logo.png" alt="Logo" />
-    </Logo>
+    <Link href="/">
+      <Logo>
+        <img src="./static/logo.png" alt="Logo" />
+      </Logo>
+    </Link>
     <Nav></Nav>
     <Searchbar></Searchbar>
     <nav>

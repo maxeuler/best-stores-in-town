@@ -1,5 +1,5 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Header from './Header';
 
 const GlobalStyle = createGlobalStyle`
@@ -17,12 +17,18 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const theme = {
+  primary: '#5c0931',
+};
+
 const Page = props => (
-  <>
-    <GlobalStyle></GlobalStyle>
-    <Header />
-    {props.children}
-  </>
+  <ThemeProvider theme={theme}>
+    <>
+      <GlobalStyle></GlobalStyle>
+      <Header />
+      {props.children}
+    </>
+  </ThemeProvider>
 );
 
 export default Page;

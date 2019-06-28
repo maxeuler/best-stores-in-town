@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 export const NavLink = styled.a`
@@ -19,10 +20,14 @@ const StyledNav = styled.nav`
 
 const Nav = () => (
   <StyledNav>
-    <NavLink>Stores</NavLink>
+    <Link href="/">
+      <NavLink>Stores</NavLink>
+    </Link>
     <NavLink>Tags</NavLink>
     <NavLink>Top</NavLink>
-    <NavLink>Add</NavLink>
+    <Link href="/create">
+      <NavLink>Add</NavLink>
+    </Link>
     <NavLink>Map</NavLink>
   </StyledNav>
 );
