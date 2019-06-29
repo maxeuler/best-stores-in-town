@@ -1,7 +1,5 @@
-const Home = () => (
-  <div>
-    <h3>Hello World</h3>
-  </div>
-);
+import Stores from '../components/Stores';
+
+const Home = () => <Stores></Stores>;
 
 export default Home;

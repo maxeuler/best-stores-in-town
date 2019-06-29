@@ -2,8 +2,12 @@ const Mutation = {
   me() {
     return 'Max';
   },
-  createStore(parent, args, ctx, info) {
-    return 'coooool';
+  async createStore(parent, args, ctx, info) {
+    const store = await ctx.db.mutation.createStore(
+      { data: { ...args } },
+      info
+    );
+    return store;
   },
 };
 

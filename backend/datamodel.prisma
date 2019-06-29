@@ -6,5 +6,7 @@ type User {
 type Store {
   id: ID! @id
   name: String!
-  description: String!
+  description: String!,
+  image: String,
+  largeImage: String
 }

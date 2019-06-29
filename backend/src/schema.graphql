@@ -1,8 +1,16 @@
+# import * from './generated/prisma.graphql'
+
 type Query {
 	me: String
+	stores(orderBy: StoreOrderByInput): [Store]!
 }
 
 type Mutation {
 	me: String
-	createStore(name: String, description: String): String
+	createStore(
+		name: String!
+		description: String!
+		image: String
+		largeImage: String
+	): Store!
 }

@@ -1,11 +1,25 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
+import { imageApi } from '../config';
 
 const CREATE_STORE_MUTATION = gql`
-  mutation CREATE_STORE_MUTATION($name: String!, $description: String!) {
-    createStore(name: $name, description: $description)
+  mutation CREATE_STORE_MUTATION(
+    $name: String!
+    $description: String!
+    $image: String
+    $largeImage: String
+  ) {
+    createStore(
+      name: $name
+      description: $description
+      image: $image
+      largeImage: $largeImage
+    ) {
+      id
+    }
   }
 `;
 
@@ -13,12 +27,30 @@ class StoreForm extends Component {
   state = {
     name: '',
     description: '',
+    image: '',
+    largeImage: '',
   };
 
   onChange = ({ target: { name, value } }) =>
     this.setState({
       [name]: value,
     });
+
+  uploadFile = async e => {
+    console.log('Uploading...');
+    const { files } = e.target;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'beststoresintown');
+
+    const res = await fetch(imageApi, { method: 'POST', body: data });
+
+    const file = await res.json();
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  };
 
   render() {
     return (
@@ -55,8 +87,14 @@ class StoreForm extends Component {
             </label>
             <label htmlFor="photo">
               Photo
-              <input type="file" name="photo" />
-              {/* TODO: if editing mode 👉🏼 show photo */}
+              <input type="file" name="photo" onChange={this.uploadFile} />
+              {this.state.image && (
+                <img
+                  src={this.state.image}
+                  alt="Upload Preview 🖼️"
+                  width="200"
+                />
+              )}
             </label>
             {/* TODO: Tags */}
             <button type="submit">Save</button>
