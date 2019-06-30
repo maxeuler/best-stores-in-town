@@ -4,7 +4,15 @@ const Mutation = {
   },
   async createStore(parent, args, ctx, info) {
     const store = await ctx.db.mutation.createStore(
-      { data: { ...args } },
+      {
+        data: {
+          tags: { set: args.tags },
+          name: args.name,
+          description: args.description,
+          image: args.image,
+          largeImage: args.largeImage,
+        },
+      },
       info
     );
     return store;

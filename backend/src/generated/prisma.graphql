@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Jun 29 2019 11:48:56 GMT+0200 (GMT+02:00)
+# timestamp: Sun Jun 30 2019 17:21:28 GMT+0200 (GMT+02:00)
 
 type AggregateStore {
   count: Int!
@@ -83,6 +83,7 @@ type Store implements Node {
   description: String!
   image: String
   largeImage: String
+  tags: [String!]!
 }
 
 """A connection to a list of items."""
@@ -101,6 +102,11 @@ input StoreCreateInput {
   description: String!
   image: String
   largeImage: String
+  tags: StoreCreatetagsInput
+}
+
+input StoreCreatetagsInput {
+  set: [String!]
 }
 
 """An edge in a connection."""
@@ -131,6 +137,7 @@ type StorePreviousValues {
   description: String!
   image: String
   largeImage: String
+  tags: [String!]!
 }
 
 type StoreSubscriptionPayload {
@@ -169,6 +176,7 @@ input StoreUpdateInput {
   description: String
   image: String
   largeImage: String
+  tags: StoreUpdatetagsInput
 }
 
 input StoreUpdateManyMutationInput {
@@ -176,6 +184,11 @@ input StoreUpdateManyMutationInput {
   description: String
   image: String
   largeImage: String
+  tags: StoreUpdatetagsInput
+}
+
+input StoreUpdatetagsInput {
+  set: [String!]
 }
 
 input StoreWhereInput {

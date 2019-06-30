@@ -21,7 +21,7 @@ const StoreList = styled.div`
 
 export const ALL_STORES_QUERY = gql`
   query ALL_STORES_QUERY {
-    stores(orderBy: id_ASC) {
+    stores(orderBy: id_DESC) {
       id
       name
       description

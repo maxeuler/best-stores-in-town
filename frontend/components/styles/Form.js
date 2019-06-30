@@ -7,7 +7,8 @@ const Form = styled.form`
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  label {
+  label,
+  h2 {
     font-size: 1.8rem;
     font-weight: 600;
   }
@@ -29,7 +30,7 @@ const Form = styled.form`
     margin: 2rem 1rem;
     text-align: right;
   }
-  button {
+  button[type='submit'] {
     margin-top: 2rem;
     background: ${props => props.theme.primary};
     border: none;

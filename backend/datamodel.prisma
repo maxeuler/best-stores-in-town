@@ -8,5 +8,6 @@ type Store {
   name: String!
   description: String!,
   image: String,
-  largeImage: String
+  largeImage: String,
+  tags: [String]!
 }
