@@ -19,7 +19,7 @@ const StoreList = styled.div`
   }
 `;
 
-const ALL_STORES_QUERY = gql`
+export const ALL_STORES_QUERY = gql`
   query ALL_STORES_QUERY {
     stores(orderBy: id_ASC) {
       id

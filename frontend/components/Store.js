@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import DeleteStore from './DeleteStore';
 
 const StoreCard = styled.div`
   border: 1px solid #ddd;
@@ -73,10 +74,10 @@ const Store = props => {
       <p>{store.description}</p>
       <Actions>
         <button type="button">Like 😍</button>
-        <Link>
+        <Link href="/">
           <a>Edit ✏️</a>
         </Link>
-        <button type="button">Delete 👋🏼</button>
+        <DeleteStore id={store.id}></DeleteStore>
       </Actions>
     </StoreCard>
   );
