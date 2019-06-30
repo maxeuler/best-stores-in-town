@@ -5,6 +5,7 @@ const Query = {
     return 'Maxi';
   },
   stores: forwardTo('db'),
+  store: forwardTo('db'),
 };
 
 module.exports = Query;

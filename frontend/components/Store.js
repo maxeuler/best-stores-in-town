@@ -1,12 +1,15 @@
 import React from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const StoreCard = styled.div`
   border: 1px solid #ddd;
-  height: 450px;
   box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.09);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   img {
-    height: 50%;
+    height: 300px;
     width: 100%;
     object-fit: cover;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
@@ -17,14 +20,43 @@ const StoreCard = styled.div`
   }
 `;
 
-const Title = styled.h3`
+export const Title = styled.h3`
   text-align: right;
   font-size: 3rem;
-  margin: 1rem auto;
-  max-width: 250px;
-  color: ${props => props.theme.primary};
+  margin: 1rem 0;
+  padding: 0 2rem;
   font-weight: 600;
-  /* transform: skew(-5deg); */
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  a {
+    color: ${props => props.theme.primary};
+    text-decoration: none;
+  }
+  :hover {
+    transform: skew(-10deg);
+  }
+`;
+
+const Actions = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid ${props => props.theme.primary};
+  button,
+  a {
+    background: none;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    color: ${props => props.theme.primary};
+    padding: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    :hover {
+      font-weight: 900;
+    }
+  }
 `;
 
 const Store = props => {
@@ -33,8 +65,19 @@ const Store = props => {
   return (
     <StoreCard>
       <img src={store.image} alt={store.name} />
-      <Title>{store.name}</Title>
+      <Title>
+        <Link href={{ pathname: '/store', query: { id: store.id } }}>
+          <a>{store.name}</a>
+        </Link>
+      </Title>
       <p>{store.description}</p>
+      <Actions>
+        <button type="button">Like 😍</button>
+        <Link>
+          <a>Edit ✏️</a>
+        </Link>
+        <button type="button">Delete 👋🏼</button>
+      </Actions>
     </StoreCard>
   );
 };

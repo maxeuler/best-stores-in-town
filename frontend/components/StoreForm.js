@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import Form from './styles/Form';
 import { imageApi } from '../config';
 
@@ -62,6 +63,10 @@ class StoreForm extends Component {
               e.preventDefault();
               const res = await createStore();
               console.log(res);
+              Router.push({
+                pathname: '/store',
+                query: { id: res.data.createStore.id },
+              });
             }}
           >
             <h3>add store</h3>
@@ -81,6 +86,7 @@ class StoreForm extends Component {
                 name="description"
                 rows="5"
                 value={this.state.description}
+                maxLength="50"
                 onChange={this.onChange}
                 required
               ></textarea>

@@ -3,6 +3,7 @@
 type Query {
 	me: String
 	stores(orderBy: StoreOrderByInput): [Store]!
+	store(where: StoreWhereInput!): Store
 }
 
 type Mutation {
