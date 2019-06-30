@@ -8,13 +8,21 @@ import Form from './styles/Form';
 import { imageApi } from '../config';
 import { ALL_STORES_QUERY } from './Stores';
 
+const AllTags = [
+  'VEGETARIAN',
+  'FAMILYFRIENDLY',
+  'HEALTHY',
+  'FASTFOOD',
+  'FINEDINING',
+];
+
 const CREATE_STORE_MUTATION = gql`
   mutation CREATE_STORE_MUTATION(
     $name: String!
     $description: String!
     $image: String
     $largeImage: String
-    $tags: [String]!
+    $tags: [Tag]!
   ) {
     createStore(
       name: $name
@@ -33,12 +41,12 @@ const CREATE_STORE_MUTATION = gql`
   }
 `;
 
-const Tags = styled.div`
+export const Tags = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const Tag = styled.button`
+export const Tag = styled.button`
   background: #fff;
   border: 1px solid ${props => props.theme.primary};
   color: ${props => props.theme.primary};
@@ -52,6 +60,7 @@ const Tag = styled.button`
   :hover {
     background: ${props => props.theme.primary};
     color: #fff;
+    opacity: 0.8;
   }
 `;
 
@@ -70,13 +79,13 @@ class StoreForm extends Component {
     cache.writeQuery({ query: ALL_STORES_QUERY, data });
   };
 
-  toggleTag = ({ target: { name } }) => {
-    const isSelected = this.state.tags.includes(name);
+  toggleTag = ({ target: { value } }) => {
+    const isSelected = this.state.tags.includes(value);
     let updatedTags = [];
     if (isSelected) {
-      updatedTags = this.state.tags.filter(tag => tag != name);
+      updatedTags = this.state.tags.filter(tag => tag != value);
     } else {
-      updatedTags = [...this.state.tags, name];
+      updatedTags = [...this.state.tags, value];
     }
     this.setState({ tags: updatedTags });
   };
@@ -158,8 +167,9 @@ class StoreForm extends Component {
                 type="button"
                 onClick={this.toggleTag}
                 name="Vegetarian"
+                value="VEGETARIAN"
                 style={
-                  this.state.tags.includes('Vegetarian')
+                  this.state.tags.includes('VEGETARIAN')
                     ? { background: '#5c0931', color: '#fff' }
                     : null
                 }
@@ -170,8 +180,9 @@ class StoreForm extends Component {
                 type="button"
                 onClick={this.toggleTag}
                 name="Family Friendly"
+                value="FAMILYFRIENDLY"
                 style={
-                  this.state.tags.includes('Family Friendly')
+                  this.state.tags.includes('FAMILYFRIENDLY')
                     ? { background: '#5c0931', color: '#fff' }
                     : null
                 }
@@ -182,8 +193,9 @@ class StoreForm extends Component {
                 type="button"
                 onClick={this.toggleTag}
                 name="Healthy"
+                value="HEALTHY"
                 style={
-                  this.state.tags.includes('Healthy')
+                  this.state.tags.includes('HEALTHY')
                     ? { background: '#5c0931', color: '#fff' }
                     : null
                 }
@@ -194,8 +206,9 @@ class StoreForm extends Component {
                 type="button"
                 onClick={this.toggleTag}
                 name="Fast Food"
+                value="FASTFOOD"
                 style={
-                  this.state.tags.includes('Fast Food')
+                  this.state.tags.includes('FASTFOOD')
                     ? { background: '#5c0931', color: '#fff' }
                     : null
                 }
@@ -206,8 +219,9 @@ class StoreForm extends Component {
                 type="button"
                 onClick={this.toggleTag}
                 name="Fine Dining"
+                value="FINEDINING"
                 style={
-                  this.state.tags.includes('Fine Dining')
+                  this.state.tags.includes('FINEDINING')
                     ? { background: '#5c0931', color: '#fff' }
                     : null
                 }

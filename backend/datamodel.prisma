@@ -1,3 +1,11 @@
+enum Tag {
+  VEGETARIAN
+  FAMILYFRIENDLY
+  HEALTHY
+  FASTFOOD
+  FINEDINING
+}
+
 type User {
   id: ID! @id
   name: String!
@@ -6,8 +14,8 @@ type User {
 type Store {
   id: ID! @id
   name: String!
-  description: String!,
-  image: String,
-  largeImage: String,
-  tags: [String]!
+  description: String!
+  image: String
+  largeImage: String
+  tags: [Tag]! @scalarList(strategy: EMBEDDED)
 }

@@ -2,7 +2,7 @@
 
 type Query {
 	me: String
-	stores(orderBy: StoreOrderByInput): [Store]!
+	stores(orderBy: StoreOrderByInput, where: StoreWhereInput): [Store]!
 	store(where: StoreWhereInput!): Store
 }
 
@@ -13,7 +13,7 @@ type Mutation {
 		description: String!
 		image: String
 		largeImage: String
-		tags: [String]!
+		tags: [Tag]!
 	): Store!
 	deleteStore(where: StoreWhereUniqueInput!): Store
 }

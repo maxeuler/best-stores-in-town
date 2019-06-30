@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -5,7 +6,7 @@ import styled from 'styled-components';
 import Store from './Store';
 import { Inner } from './Page';
 
-const StoreList = styled.div`
+export const StoreList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(250px, 350px));
   justify-content: space-around;
@@ -35,6 +36,7 @@ const Stores = () => (
     {({ loading, error, data }) => {
       if (error) return <p>Error</p>;
       if (loading) return <p>Loading</p>;
+      console.log(data.stores);
       return (
         <Inner>
           <StoreList>

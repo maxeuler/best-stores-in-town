@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sun Jun 30 2019 17:21:28 GMT+0200 (GMT+02:00)
+# timestamp: Sun Jun 30 2019 20:34:24 GMT+0200 (GMT+02:00)
 
 type AggregateStore {
   count: Int!
@@ -83,7 +83,7 @@ type Store implements Node {
   description: String!
   image: String
   largeImage: String
-  tags: [String!]!
+  tags: [Tag!]!
 }
 
 """A connection to a list of items."""
@@ -106,7 +106,7 @@ input StoreCreateInput {
 }
 
 input StoreCreatetagsInput {
-  set: [String!]
+  set: [Tag!]
 }
 
 """An edge in a connection."""
@@ -137,7 +137,7 @@ type StorePreviousValues {
   description: String!
   image: String
   largeImage: String
-  tags: [String!]!
+  tags: [Tag!]!
 }
 
 type StoreSubscriptionPayload {
@@ -188,7 +188,7 @@ input StoreUpdateManyMutationInput {
 }
 
 input StoreUpdatetagsInput {
-  set: [String!]
+  set: [Tag!]
 }
 
 input StoreWhereInput {
@@ -403,6 +403,14 @@ input StoreWhereUniqueInput {
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   store(where: StoreSubscriptionWhereInput): StoreSubscriptionPayload
+}
+
+enum Tag {
+  VEGETARIAN
+  FAMILYFRIENDLY
+  HEALTHY
+  FASTFOOD
+  FINEDINING
 }
 
 type User implements Node {
