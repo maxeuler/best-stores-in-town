@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import Form from './styles/Form';
 import { imageApi } from '../config';
+import { ALL_STORES_QUERY } from './Stores';
 
 const CREATE_STORE_MUTATION = gql`
   mutation CREATE_STORE_MUTATION(
@@ -20,6 +21,9 @@ const CREATE_STORE_MUTATION = gql`
       largeImage: $largeImage
     ) {
       id
+      description
+      image
+      largeImage
     }
   }
 `;
@@ -30,6 +34,12 @@ class StoreForm extends Component {
     description: '',
     image: '',
     largeImage: '',
+  };
+
+  updateCache = (cache, payload) => {
+    const data = cache.readQuery({ query: ALL_STORES_QUERY });
+    data.stores.push(payload.data.createStore);
+    cache.writeQuery({ query: ALL_STORES_QUERY, data });
   };
 
   onChange = ({ target: { name, value } }) =>
@@ -55,7 +65,11 @@ class StoreForm extends Component {
 
   render() {
     return (
-      <Mutation mutation={CREATE_STORE_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={CREATE_STORE_MUTATION}
+        variables={this.state}
+        update={this.updateCache}
+      >
         {(createStore, { loading, error }) => (
           <Form
             method="POST"
@@ -86,7 +100,7 @@ class StoreForm extends Component {
                 name="description"
                 rows="5"
                 value={this.state.description}
-                maxLength="50"
+                maxLength="300"
                 onChange={this.onChange}
                 required
               ></textarea>
