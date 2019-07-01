@@ -30,6 +30,9 @@ const Form = styled.form`
     margin: 2rem 1rem;
     text-align: right;
   }
+  fieldset {
+    border: none;
+  }
   button[type='submit'] {
     margin-top: 2rem;
     background: ${props => props.theme.primary};

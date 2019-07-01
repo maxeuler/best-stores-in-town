@@ -8,14 +8,6 @@ import Form from './styles/Form';
 import { imageApi } from '../config';
 import { ALL_STORES_QUERY } from './Stores';
 
-const AllTags = [
-  'VEGETARIAN',
-  'FAMILYFRIENDLY',
-  'HEALTHY',
-  'FASTFOOD',
-  'FINEDINING',
-];
-
 const CREATE_STORE_MUTATION = gql`
   mutation CREATE_STORE_MUTATION(
     $name: String!
@@ -44,6 +36,9 @@ const CREATE_STORE_MUTATION = gql`
 export const Tags = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const Tag = styled.button`
@@ -124,7 +119,6 @@ class StoreForm extends Component {
             onSubmit={async e => {
               e.preventDefault();
               const res = await createStore();
-              console.log(res);
               Router.push({
                 pathname: '/store',
                 query: { id: res.data.createStore.id },

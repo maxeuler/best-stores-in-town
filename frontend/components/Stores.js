@@ -36,7 +36,6 @@ const Stores = () => (
     {({ loading, error, data }) => {
       if (error) return <p>Error</p>;
       if (loading) return <p>Loading</p>;
-      console.log(data.stores);
       return (
         <Inner>
           <StoreList>

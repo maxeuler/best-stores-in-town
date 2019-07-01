@@ -16,4 +16,5 @@ type Mutation {
 		tags: [Tag]!
 	): Store!
 	deleteStore(where: StoreWhereUniqueInput!): Store
+	signup(email: String!, name: String!, password: String!): User!
 }

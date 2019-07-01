@@ -39,7 +39,9 @@ const Header = () => (
     <Searchbar></Searchbar>
     <nav>
       <NavLink>Heart</NavLink>
-      <NavLink>Logout</NavLink>
+      <Link href="/auth">
+        <NavLink>Login</NavLink>
+      </Link>
       <NavLink>Acc</NavLink>
     </nav>
   </SytledHeader>

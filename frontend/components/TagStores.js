@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Query, ApolloConsumer } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { StoreList, ALL_STORES_QUERY } from './Stores';
+import { StoreList } from './Stores';
 import Store from './Store';
 import { Inner } from './Page';
 import { Tags, Tag } from './StoreForm';
@@ -108,7 +108,6 @@ class TagStores extends Component {
           {({ loading, error, data }) => {
             if (error) return <p>Error</p>;
             if (loading) return <p>Loading</p>;
-            console.log(data.stores);
             return (
               <StoreList>
                 {data.stores.map(store => {
