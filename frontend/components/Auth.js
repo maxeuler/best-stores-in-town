@@ -6,6 +6,7 @@ import Signin from './Signin';
 const ToggleButton = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 4rem;
   button {
     background: none;
     border: none;

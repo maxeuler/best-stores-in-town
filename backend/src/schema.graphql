@@ -1,9 +1,9 @@
 # import * from './generated/prisma.graphql'
 
 type Query {
-	me: String
 	stores(orderBy: StoreOrderByInput, where: StoreWhereInput): [Store]!
 	store(where: StoreWhereInput!): Store
+	currentUser: User
 }
 
 type Mutation {
@@ -17,4 +17,5 @@ type Mutation {
 	): Store!
 	deleteStore(where: StoreWhereUniqueInput!): Store
 	signup(email: String!, name: String!, password: String!): User!
+	signin(email: String!, password: String!): User
 }

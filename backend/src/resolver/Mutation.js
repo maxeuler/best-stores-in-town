@@ -1,4 +1,5 @@
 const bycrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const Mutation = {
   me() {
@@ -28,7 +29,7 @@ const Mutation = {
     // 2. hash password
     const password = await bycrypt.hash(args.password, 10);
     // 3. create user
-    const user = ctx.db.mutation.createUser(
+    const user = await ctx.db.mutation.createUser(
       {
         data: {
           ...args,
@@ -37,7 +38,36 @@ const Mutation = {
       },
       info
     );
-
+    // 4. generate jwt
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // 5. set cookie with jwt
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    });
+    // 6. send user back
+    return user;
+  },
+  async signin(parent, args, ctx, info) {
+    const { email, password } = args;
+    // 1. find user
+    const user = await ctx.db.query.user({ where: { email } });
+    if (!user) {
+      throw new Error(`No user found for ${email}`);
+    }
+    // 2. check password
+    const isPasswordValid = await bycrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error('Password is invalid! 🚫');
+    }
+    // 3. generate jwt
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // 4. set cookie with jwt
+    ctx.response.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    });
+    // 5. send user back
     return user;
   },
 };

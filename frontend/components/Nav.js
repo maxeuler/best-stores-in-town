@@ -26,7 +26,9 @@ const Nav = () => (
     <Link href="/tags">
       <NavLink>Tags</NavLink>
     </Link>
-    <NavLink>Top</NavLink>
+    <Link href="/top">
+      <NavLink>Top</NavLink>
+    </Link>
     <Link href="/create">
       <NavLink>Add</NavLink>
     </Link>
