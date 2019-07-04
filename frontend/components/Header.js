@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Query } from 'react-apollo';
 import Nav, { NavLink } from './Nav';
 import Searchbar from './Searchbar';
+import { CURRENT_USER_QUERY } from './CheckAuth';
+import Signout from './Signout';
 
 const SytledHeader = styled.header`
   height: 10rem;
@@ -29,22 +32,35 @@ const Logo = styled.div`
 `;
 
 const Header = () => (
-  <SytledHeader>
-    <Link href="/">
-      <Logo>
-        <img src="./static/logo.png" alt="Logo" />
-      </Logo>
-    </Link>
-    <Nav></Nav>
-    <Searchbar></Searchbar>
-    <nav>
-      <NavLink>Heart</NavLink>
-      <Link href="/auth">
-        <NavLink>Login</NavLink>
-      </Link>
-      <NavLink>Acc</NavLink>
-    </nav>
-  </SytledHeader>
+  <Query query={CURRENT_USER_QUERY}>
+    {({ data }) => (
+      <SytledHeader>
+        <Link href="/">
+          <Logo>
+            <img src="./static/logo.png" alt="Logo" />
+          </Logo>
+        </Link>
+        <Nav></Nav>
+        <Searchbar></Searchbar>
+        {data.currentUser && (
+          <nav>
+            <NavLink>Heart</NavLink>
+            <NavLink>
+              <Signout></Signout>
+            </NavLink>
+            <NavLink>Acc</NavLink>
+          </nav>
+        )}
+        {!data.currentUser && (
+          <nav>
+            <Link href="/auth">
+              <NavLink>Sign In</NavLink>
+            </Link>
+          </nav>
+        )}
+      </SytledHeader>
+    )}
+  </Query>
 );
 
 export default Header;

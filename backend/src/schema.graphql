@@ -1,5 +1,9 @@
 # import * from './generated/prisma.graphql'
 
+type Message {
+	message: String!
+}
+
 type Query {
 	stores(orderBy: StoreOrderByInput, where: StoreWhereInput): [Store]!
 	store(where: StoreWhereInput!): Store
@@ -18,4 +22,5 @@ type Mutation {
 	deleteStore(where: StoreWhereUniqueInput!): Store
 	signup(email: String!, name: String!, password: String!): User!
 	signin(email: String!, password: String!): User
+	signout: Message!
 }

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Signup from './Signup';
