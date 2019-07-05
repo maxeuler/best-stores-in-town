@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-restricted-globals */
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';

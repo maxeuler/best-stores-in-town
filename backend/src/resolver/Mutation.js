@@ -14,6 +14,11 @@ const Mutation = {
           description: args.description,
           image: args.image,
           largeImage: args.largeImage,
+          user: {
+            connect: {
+              id: ctx.request.userId,
+            },
+          },
         },
       },
       info

@@ -27,6 +27,9 @@ export const ALL_STORES_QUERY = gql`
       name
       description
       image
+      user {
+        id
+      }
     }
   }
 `;

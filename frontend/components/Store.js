@@ -1,7 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { Query } from 'react-apollo';
 import DeleteStore from './DeleteStore';
+import { CURRENT_USER_QUERY } from './CheckAuth';
 
 const StoreCard = styled.div`
   border: 1px solid #ddd;
@@ -41,8 +43,8 @@ export const Title = styled.h3`
 `;
 
 const Actions = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-around;
   border-top: 1px solid ${props => props.theme.primary};
   button,
   a {
@@ -73,11 +75,30 @@ const Store = props => {
       </Title>
       <p>{store.description}</p>
       <Actions>
-        <button type="button">Like 😍</button>
-        <Link href="/">
-          <a>Edit ✏️</a>
-        </Link>
-        <DeleteStore id={store.id}></DeleteStore>
+        <Query query={CURRENT_USER_QUERY}>
+          {({ data }) => {
+            if (!data.currentUser) {
+              return (
+                <Link href="/">
+                  <a>View 🍝</a>
+                </Link>
+              );
+            }
+            return (
+              <>
+                <button type="button">Like 😍</button>
+                {data.currentUser.id == store.user.id && (
+                  <>
+                    <Link href="/">
+                      <a>Edit ✏️</a>
+                    </Link>
+                    <DeleteStore id={store.id}></DeleteStore>
+                  </>
+                )}
+              </>
+            );
+          }}
+        </Query>
       </Actions>
     </StoreCard>
   );

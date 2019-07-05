@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import Form from './styles/Form';
 import { Error } from './Signup';
 import { CURRENT_USER_QUERY } from './CheckAuth';
@@ -36,12 +37,13 @@ class Signin extends Component {
             method="POST"
             onSubmit={async e => {
               e.preventDefault();
-              const res = await signin();
+              await signin();
               this.setState({
                 email: '',
                 password: '',
                 error: '',
               });
+              Router.push('/');
             }}
           >
             <h3>Sign In 🔓</h3>

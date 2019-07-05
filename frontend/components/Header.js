@@ -48,7 +48,7 @@ const Header = () => (
             <NavLink>
               <Signout></Signout>
             </NavLink>
-            <NavLink>Acc</NavLink>
+            <NavLink>{data.currentUser.name}</NavLink>
           </nav>
         )}
         {!data.currentUser && (

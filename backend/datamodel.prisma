@@ -20,4 +20,5 @@ type Store {
   image: String
   largeImage: String
   tags: [Tag]! @scalarList(strategy: EMBEDDED)
+  user: User! @relation(link: INLINE)
 }
