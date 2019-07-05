@@ -14,6 +14,9 @@ const TAG_STORES_QUERY = gql`
       description
       image
       tags
+      user {
+        id
+      }
     }
   }
 `;

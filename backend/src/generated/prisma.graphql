@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Jul 05 2019 20:33:58 GMT+0200 (GMT+02:00)
+# timestamp: Fri Jul 05 2019 23:07:56 GMT+0200 (GMT+02:00)
 
 type AggregateStore {
   count: Int!
@@ -21,18 +21,18 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createStore(data: StoreCreateInput!): Store!
   createUser(data: UserCreateInput!): User!
-  updateStore(data: StoreUpdateInput!, where: StoreWhereUniqueInput!): Store
+  createStore(data: StoreCreateInput!): Store!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deleteStore(where: StoreWhereUniqueInput!): Store
+  updateStore(data: StoreUpdateInput!, where: StoreWhereUniqueInput!): Store
   deleteUser(where: UserWhereUniqueInput!): User
-  upsertStore(where: StoreWhereUniqueInput!, create: StoreCreateInput!, update: StoreUpdateInput!): Store!
+  deleteStore(where: StoreWhereUniqueInput!): Store
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyStores(data: StoreUpdateManyMutationInput!, where: StoreWhereInput): BatchPayload!
+  upsertStore(where: StoreWhereUniqueInput!, create: StoreCreateInput!, update: StoreUpdateInput!): Store!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  deleteManyStores(where: StoreWhereInput): BatchPayload!
+  updateManyStores(data: StoreUpdateManyMutationInput!, where: StoreWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyStores(where: StoreWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -63,12 +63,12 @@ type PageInfo {
 }
 
 type Query {
-  stores(where: StoreWhereInput, orderBy: StoreOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Store]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  store(where: StoreWhereUniqueInput!): Store
+  stores(where: StoreWhereInput, orderBy: StoreOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Store]!
   user(where: UserWhereUniqueInput!): User
-  storesConnection(where: StoreWhereInput, orderBy: StoreOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoreConnection!
+  store(where: StoreWhereUniqueInput!): Store
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  storesConnection(where: StoreWhereInput, orderBy: StoreOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StoreConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -104,11 +104,25 @@ input StoreCreateInput {
   image: String
   largeImage: String
   tags: StoreCreatetagsInput
-  user: UserCreateOneInput!
+  user: UserCreateOneWithoutHeartsInput!
+}
+
+input StoreCreateManyWithoutUserInput {
+  create: [StoreCreateWithoutUserInput!]
+  connect: [StoreWhereUniqueInput!]
 }
 
 input StoreCreatetagsInput {
   set: [Tag!]
+}
+
+input StoreCreateWithoutUserInput {
+  id: ID
+  name: String!
+  description: String!
+  image: String
+  largeImage: String
+  tags: StoreCreatetagsInput
 }
 
 """An edge in a connection."""
@@ -140,6 +154,217 @@ type StorePreviousValues {
   image: String
   largeImage: String
   tags: [Tag!]!
+}
+
+input StoreScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StoreScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StoreScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StoreScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  image: String
+
+  """All values that are not equal to given value."""
+  image_not: String
+
+  """All values that are contained in given list."""
+  image_in: [String!]
+
+  """All values that are not contained in given list."""
+  image_not_in: [String!]
+
+  """All values less than the given value."""
+  image_lt: String
+
+  """All values less than or equal the given value."""
+  image_lte: String
+
+  """All values greater than the given value."""
+  image_gt: String
+
+  """All values greater than or equal the given value."""
+  image_gte: String
+
+  """All values containing the given string."""
+  image_contains: String
+
+  """All values not containing the given string."""
+  image_not_contains: String
+
+  """All values starting with the given string."""
+  image_starts_with: String
+
+  """All values not starting with the given string."""
+  image_not_starts_with: String
+
+  """All values ending with the given string."""
+  image_ends_with: String
+
+  """All values not ending with the given string."""
+  image_not_ends_with: String
+  largeImage: String
+
+  """All values that are not equal to given value."""
+  largeImage_not: String
+
+  """All values that are contained in given list."""
+  largeImage_in: [String!]
+
+  """All values that are not contained in given list."""
+  largeImage_not_in: [String!]
+
+  """All values less than the given value."""
+  largeImage_lt: String
+
+  """All values less than or equal the given value."""
+  largeImage_lte: String
+
+  """All values greater than the given value."""
+  largeImage_gt: String
+
+  """All values greater than or equal the given value."""
+  largeImage_gte: String
+
+  """All values containing the given string."""
+  largeImage_contains: String
+
+  """All values not containing the given string."""
+  largeImage_not_contains: String
+
+  """All values starting with the given string."""
+  largeImage_starts_with: String
+
+  """All values not starting with the given string."""
+  largeImage_not_starts_with: String
+
+  """All values ending with the given string."""
+  largeImage_ends_with: String
+
+  """All values not ending with the given string."""
+  largeImage_not_ends_with: String
 }
 
 type StoreSubscriptionPayload {
@@ -179,7 +404,15 @@ input StoreUpdateInput {
   image: String
   largeImage: String
   tags: StoreUpdatetagsInput
-  user: UserUpdateOneRequiredInput
+  user: UserUpdateOneRequiredWithoutHeartsInput
+}
+
+input StoreUpdateManyDataInput {
+  name: String
+  description: String
+  image: String
+  largeImage: String
+  tags: StoreUpdatetagsInput
 }
 
 input StoreUpdateManyMutationInput {
@@ -190,8 +423,44 @@ input StoreUpdateManyMutationInput {
   tags: StoreUpdatetagsInput
 }
 
+input StoreUpdateManyWithoutUserInput {
+  create: [StoreCreateWithoutUserInput!]
+  connect: [StoreWhereUniqueInput!]
+  set: [StoreWhereUniqueInput!]
+  disconnect: [StoreWhereUniqueInput!]
+  delete: [StoreWhereUniqueInput!]
+  update: [StoreUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [StoreUpdateManyWithWhereNestedInput!]
+  deleteMany: [StoreScalarWhereInput!]
+  upsert: [StoreUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input StoreUpdateManyWithWhereNestedInput {
+  where: StoreScalarWhereInput!
+  data: StoreUpdateManyDataInput!
+}
+
 input StoreUpdatetagsInput {
   set: [Tag!]
+}
+
+input StoreUpdateWithoutUserDataInput {
+  name: String
+  description: String
+  image: String
+  largeImage: String
+  tags: StoreUpdatetagsInput
+}
+
+input StoreUpdateWithWhereUniqueWithoutUserInput {
+  where: StoreWhereUniqueInput!
+  data: StoreUpdateWithoutUserDataInput!
+}
+
+input StoreUpsertWithWhereUniqueWithoutUserInput {
+  where: StoreWhereUniqueInput!
+  update: StoreUpdateWithoutUserDataInput!
+  create: StoreCreateWithoutUserInput!
 }
 
 input StoreWhereInput {
@@ -405,8 +674,8 @@ input StoreWhereUniqueInput {
 }
 
 type Subscription {
-  store(where: StoreSubscriptionWhereInput): StoreSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  store(where: StoreSubscriptionWhereInput): StoreSubscriptionPayload
 }
 
 enum Tag {
@@ -422,6 +691,7 @@ type User implements Node {
   name: String!
   email: String!
   password: String!
+  hearts(where: StoreWhereInput, orderBy: StoreOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Store!]
 }
 
 """A connection to a list of items."""
@@ -439,11 +709,19 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  hearts: StoreCreateManyWithoutUserInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutHeartsInput {
+  create: UserCreateWithoutHeartsInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutHeartsInput {
+  id: ID
+  name: String!
+  email: String!
+  password: String!
 }
 
 """An edge in a connection."""
@@ -504,16 +782,11 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-  password: String
-}
-
 input UserUpdateInput {
   name: String
   email: String
   password: String
+  hearts: StoreUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -522,16 +795,22 @@ input UserUpdateManyMutationInput {
   password: String
 }
 
-input UserUpdateOneRequiredInput {
-  create: UserCreateInput
+input UserUpdateOneRequiredWithoutHeartsInput {
+  create: UserCreateWithoutHeartsInput
   connect: UserWhereUniqueInput
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  update: UserUpdateWithoutHeartsDataInput
+  upsert: UserUpsertWithoutHeartsInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateWithoutHeartsDataInput {
+  name: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutHeartsInput {
+  update: UserUpdateWithoutHeartsDataInput!
+  create: UserCreateWithoutHeartsInput!
 }
 
 input UserWhereInput {
@@ -697,6 +976,7 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  hearts_some: StoreWhereInput
 }
 
 input UserWhereUniqueInput {

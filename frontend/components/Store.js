@@ -76,28 +76,24 @@ const Store = props => {
       <p>{store.description}</p>
       <Actions>
         <Query query={CURRENT_USER_QUERY}>
-          {({ data }) => {
-            if (!data.currentUser) {
-              return (
-                <Link href="/">
-                  <a>View 🍝</a>
-                </Link>
-              );
-            }
-            return (
-              <>
-                <button type="button">Like 😍</button>
-                {data.currentUser.id == store.user.id && (
-                  <>
-                    <Link href="/">
-                      <a>Edit ✏️</a>
-                    </Link>
-                    <DeleteStore id={store.id}></DeleteStore>
-                  </>
-                )}
-              </>
-            );
-          }}
+          {({ data }) => (
+            <>
+              <Link
+                href={{ pathname: '/store', query: { id: store.id || '' } }}
+              >
+                <a>View 🍝</a>
+              </Link>
+
+              {data.currentUser.id == store.user.id && (
+                <>
+                  <Link href="/">
+                    <a>Edit ✏️</a>
+                  </Link>
+                  <DeleteStore id={store.id}></DeleteStore>
+                </>
+              )}
+            </>
+          )}
         </Query>
       </Actions>
     </StoreCard>

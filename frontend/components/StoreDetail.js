@@ -45,17 +45,6 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Actions = styled.div`
-  width: 20%;
-  display: flex;
-  justify-content: space-around;
-  a {
-    text-decoration: none;
-    color: ${props => props.theme.primary};
-    font-size: 2rem;
-  }
-`;
-
 class StoreDetail extends Component {
   render() {
     return (
@@ -70,11 +59,6 @@ class StoreDetail extends Component {
               <Info>
                 <Header>
                   <h3>{store.name}</h3>
-                  <Actions>
-                    <a href="">Delete</a>
-                    <a href="">Edit</a>
-                    <a href="">Heart</a>
-                  </Actions>
                 </Header>
                 <p>{store.description}</p>
               </Info>
