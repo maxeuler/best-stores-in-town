@@ -1,8 +1,8 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 import Auth from './Auth';
-import { CenterTitle } from './TopList';
 
 export const CURRENT_USER_QUERY = gql`
   query {
@@ -13,6 +13,12 @@ export const CURRENT_USER_QUERY = gql`
     }
   }
 `;
+
+const CenteredTitle = styled.h3`
+  text-align: center;
+  font-size: 4rem;
+`;
+
 const CheckAuth = props => (
   <Query query={CURRENT_USER_QUERY}>
     {({ data, loading }) => {
@@ -20,7 +26,7 @@ const CheckAuth = props => (
       if (!data.currentUser) {
         return (
           <>
-            <CenterTitle>Please Sign In 🥺</CenterTitle>
+            <CenteredTitle>Please Sign In 🥺</CenteredTitle>
             <Auth></Auth>
           </>
         );

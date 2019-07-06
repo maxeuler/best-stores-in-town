@@ -84,11 +84,11 @@ const Store = props => {
                 <a>View 🍝</a>
               </Link>
 
-              {data.currentUser.id == store.user.id && (
+              {data.currentUser && data.currentUser.id == store.user.id && (
                 <>
-                  <Link href="/">
+                  {/* <Link href="/">
                     <a>Edit ✏️</a>
-                  </Link>
+                  </Link> */}
                   <DeleteStore id={store.id}></DeleteStore>
                 </>
               )}

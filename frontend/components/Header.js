@@ -3,7 +3,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import Nav, { NavLink } from './Nav';
-import Searchbar from './Searchbar';
 import { CURRENT_USER_QUERY } from './CheckAuth';
 import Signout from './Signout';
 
@@ -35,29 +34,28 @@ const Header = () => (
   <Query query={CURRENT_USER_QUERY}>
     {({ data }) => (
       <SytledHeader>
-        <Link href="/">
-          <Logo>
-            <img src="./static/logo.png" alt="Logo" />
-          </Logo>
-        </Link>
-        <Nav></Nav>
-        <Searchbar></Searchbar>
-        {data.currentUser && (
-          <nav>
-            <NavLink>Heart</NavLink>
-            <NavLink>
-              <Signout></Signout>
-            </NavLink>
-            <NavLink>{data.currentUser.name}</NavLink>
-          </nav>
-        )}
-        {!data.currentUser && (
-          <nav>
+        <Nav>
+          <Link href="/">
+            <Logo>
+              <img src="./static/logo.png" alt="Logo" />
+            </Logo>
+          </Link>
+        </Nav>
+        <nav>
+          {data.currentUser && (
+            <>
+              <NavLink>
+                <Signout></Signout>
+              </NavLink>
+              <NavLink>{data.currentUser.name}</NavLink>
+            </>
+          )}
+          {!data.currentUser && (
             <Link href="/auth">
               <NavLink>Sign In</NavLink>
             </Link>
-          </nav>
-        )}
+          )}
+        </nav>
       </SytledHeader>
     )}
   </Query>

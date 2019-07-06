@@ -18,16 +18,14 @@ const StyledNav = styled.nav`
   border-right: 0.5px solid #555;
 `;
 
-const Nav = () => (
+const Nav = props => (
   <StyledNav>
+    {props.children}
     <Link href="/">
       <NavLink>Stores</NavLink>
     </Link>
     <Link href="/tags">
       <NavLink>Tags</NavLink>
-    </Link>
-    <Link href="/top">
-      <NavLink>Top</NavLink>
     </Link>
     <Link href="/create">
       <NavLink>Add</NavLink>
