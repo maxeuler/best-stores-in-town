@@ -27,7 +27,7 @@
 
 ![Create Store](screenshots/Bildschirmfoto&#32;2019-07-06&#32;um&#32;07.55.09.png)
 
-## Some ideas for future features 🤔
+## Some ideas for future features 🤔 (with another stack 👀)
 
 + reviews
 + rating system
