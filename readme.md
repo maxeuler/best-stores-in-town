@@ -7,7 +7,7 @@
 + React
 + NextJS
 
-⚠️ With prisma and apollo ther's a whole lot of boilerplate stuff when starting a project. And there are also some vulnerabilities in the dependencies which aren't fixable right now. That's the reason I didn't expand this with many features to close this project as soon as possible and rather look for another GraphQL stack 🤷🏼‍
+⚠️ With prisma and apollo there's a whole lot of boilerplate stuff when starting a project. And there are also some vulnerabilities in the dependencies which aren't fixable right now. That's the reason I didn't expand this with many features to close this project as soon as possible and rather look for another GraphQL stack 🤷🏼‍
 
 ## Get some good food  🥑
 
